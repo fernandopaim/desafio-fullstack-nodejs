@@ -1,0 +1,32 @@
+{
+    "parserOptions": {
+        "parser": "babel-eslint",
+        "ecmaVersion": 2017,
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": ["warn", 4,
+            {
+                "VariableDeclarator": "first",
+                "ArrayExpression": 1,
+                "ObjectExpression": "first",
+                "CallExpression": {"arguments": "first"},
+                "FunctionDeclaration": {"parameters": "first"},
+                "FunctionExpression": {"parameters": "first"},
+                "MemberExpression": 1,
+                "ignoredNodes": ["TemplateLiteral"] //bug de identação que quebrava o código
+            }
+        ],
+        "template-curly-spacing" : "off",
+        "vue/html-indent": 4,
+        "no-unused-vars": "off",
+        "vue/max-attributes-per-line": 4,
+        "vue/singleline-html-element-content-newline": "off",
+        "vue/multiline-html-element-content-newline": "off",
+        "vue/html-closing-bracket-newline": "off",
+        "vue/v-on-style": "off",
+        "vue/no-unused-components": "warn",
+        "semi": ["error", "never"]
+    },
+    "extends": ["plugin:vue/recommended"]
+}
