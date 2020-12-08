@@ -93,7 +93,7 @@ export default {
 
             let unformattedId = this.person.id.replace(/\D/g, '')
 
-            fetch(`${process.env.VUE_APP_API_URL}/v1/utils/validation/${this.person.idType}validation`, {
+            fetch(`${process.env.VUE_APP_API_URL}/v1/utils/validation/${this.person.idType}`, {
                 method: 'POST',
                 body: JSON.stringify({
                     [this.person.idType]: unformattedId
