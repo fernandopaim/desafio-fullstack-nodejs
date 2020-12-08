@@ -37,6 +37,8 @@ services:
             - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
         volumes:
             - ./backend/data:/data/db
+        ports:
+            - "27017:27017"
 
     frontend:
         image: node

@@ -2,7 +2,7 @@
   <div id="body">
       <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-sm-12 col-md-8 col-lg-6 text-center">
+                <div class="col-sm-12 col-md-8 col-lg-5 text-center">
                     <v-form @submit.prevent="sumitForm">
                         <v-row>
                             <div class="col-12 col-sm-6">
@@ -93,8 +93,18 @@ export default {
 
             let unformattedId = this.person.id.replace(/\D/g, '')
 
-            fetch(`${process.env.VUE_APP_API_URL}/validation?${this.person.idType}=${unformattedId}`, {
+            fetch(`${process.env.VUE_APP_API_URL}/v1/utils/validation/${this.person.idType}validation`, {
                 method: 'POST',
+                body: JSON.stringify({
+                    [this.person.idType]: unformattedId
+                }),
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'accept': 'application/json'
+                }),
+                redirect: 'follow',
+                mode: 'cors',
+                cache: 'default'
             }).then((response) => {
                 response.json().then((data) => {
                     if (data.success)

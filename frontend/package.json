@@ -1,7 +1,9 @@
 {
   "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "author": "Fernando Paim da Silva",
+  "license": "ISC",
+  "repository": "https://github.com/fernandopaim/desafio-fullstack-nodejs/tree/main/frontend",
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
