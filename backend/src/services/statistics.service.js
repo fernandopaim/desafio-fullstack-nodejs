@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const { Statistic } = require('../models');
-const ApiError = require('../utils/ApiError');
+const httpStatus = require('http-status')
+const { Statistic } = require('../models')
+const ApiError = require('../utils/ApiError')
 
 /**
  * Query for statistics
@@ -12,8 +12,14 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<QueryResult>}
  */
 const queryStatistics = async (filter, options = {}) => {
-  return await Statistic.paginate(filter, options);
-};
+  const uptime = await Statistic.findOne({ route: 'uptime' })
+  const elapsedTime = Math.floor((Date.now() - Date.parse(uptime.createdAt))/60000)
+  const statistics = await Statistic.find({ route: {$ne: 'uptime'}, ...filter }, options)
+  return  { uptime: {
+            elapsedTime: `${elapsedTime} minute(s)`,
+            activeAt: uptime.createdAt
+          }, ...statistics }
+}
 
 /**
  * Get statistic by route
@@ -21,8 +27,8 @@ const queryStatistics = async (filter, options = {}) => {
  * @returns {Promise<Statistic>}
  */
 const getStatisticByRoute = async (route) => {
-  return Statistic.findOne({ route: route });
-};
+  return Statistic.findOne({ route: route })
+}
 
 /**
  * Update statistic by route
@@ -30,18 +36,17 @@ const getStatisticByRoute = async (route) => {
  * @returns {Promise<Statistic>}
  */
 const updateStatisticByRoute = async (route) => {
-  const statistic = await getStatisticByRoute(route);
-  if (!statistic) {
-    return Statistic.create({route: route, count: 1});
-  } else {
-    statistic.count++
-  }
-  await statistic.save();
-  return statistic;
-};
+  const statistic = await getStatisticByRoute(route)
+
+  if (!statistic)
+    return Statistic.create({ route: route, count: 1 })
+
+  statistic.count++
+  return await statistic.save()
+}
 
 module.exports = {
   queryStatistics,
   getStatisticByRoute,
   updateStatisticByRoute,
-};
+}
