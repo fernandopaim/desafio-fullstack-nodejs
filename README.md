@@ -12,9 +12,8 @@ https://github.com/hagopj13/node-express-mongoose-boilerplate
 
 ## Observações
 
-Estou concluindo o projeto. Vou integrar os docker-compose files em apenas um na raiz do projeto.
+Estou melhorando o projeto. Vou integrar os docker-compose files em apenas um na raiz do projeto.
 Estou criando os testes.
-Estou criando endpoint de estatísticas.
 
 ## Rodar o projeto em modo development
 
